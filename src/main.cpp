@@ -1,4 +1,7 @@
 #include <Shader.h>
+#include <VertexBuffer.h>
+#include <IndexBuffer.h>
+#include <VertexArray.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -17,9 +20,16 @@ void processInput(GLFWwindow *window)
 
 float vertices[] = 
 {
+    -0.5f,  0.5f, 0.0f,
     -0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f,
+     0.5f,  0.5f, 0.0f,
      0.5f, -0.5f, 0.0f
+};
+
+unsigned int indices[] =
+{
+    0, 1, 2,
+    1, 2, 3
 };
 
 int main()
@@ -59,17 +69,14 @@ int main()
 
     Shader basicShader("Shaders/vertexShader.glsl", "Shaders/fragmentShader.glsl");
 
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    VertexArray va;
+    VertexBuffer vb(vertices, sizeof(vertices));
 
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    VertexBufferLayout layout;
+    layout.Push<float>(3);
+    va.AddBuffer(vb, layout);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    IndexBuffer ib(indices, 6);
 
     // Main loop
     while (!glfwWindowShouldClose(window))
@@ -81,9 +88,10 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Swap front and back buffers
-        basicShader.shaderUse();
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        basicShader.Use();
+        va.Bind();
+        ib.Bind();
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         glfwSwapBuffers(window);
 

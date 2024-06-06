@@ -57,6 +57,9 @@ endif()
 # Add source files
 set(SOURCES 
     src/main.cpp 
+    src/VertexBuffer.cpp
+    src/IndexBuffer.cpp
+    src/VertexArray.cpp
     src/Shader.cpp
 )
 

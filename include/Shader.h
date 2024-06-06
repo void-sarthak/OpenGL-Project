@@ -17,7 +17,7 @@ class Shader
     Shader(const char *vertexShader, const char* fragmentShader);
     ~Shader();
 
-    void shaderUse();
+    void Use();
 
     void shaderSetBool(const std::string &name, bool value) const;
     void shaderSetInt(const std:: string &name, int value) const;

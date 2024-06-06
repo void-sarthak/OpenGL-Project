@@ -8,7 +8,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
 
-     // Print paths for debugging
+    // Print paths for debugging
     // std::cout << "Vertex Shader Path: " << vertexPath << std::endl;
     // std::cout << "Fragment Shader Path: " << fragmentPath << std::endl;
 
@@ -100,7 +100,7 @@ Shader::~Shader()
 
 }
 
-void Shader::shaderUse()
+void Shader::Use()
 {
     glUseProgram(ID);
 }
