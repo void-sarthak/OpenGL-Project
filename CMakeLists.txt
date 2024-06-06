@@ -20,12 +20,15 @@ endfunction()
 # Download and build GLFW
 set(GLFW_VERSION 3.3.2)
 set(GLFW_URL https://github.com/glfw/glfw/archive/${GLFW_VERSION}.zip)
-set(GLFW_SOURCE_DIR ${CMAKE_BINARY_DIR}/glfw-src/glfw-${GLFW_VERSION})
+set(GLFW_SOURCE_DIR ${CMAKE_BINARY_DIR}/glfw-src)
 set(GLFW_BUILD_DIR ${CMAKE_BINARY_DIR}/glfw-build)
 set(GLFW_INSTALL_DIR ${CMAKE_BINARY_DIR}/glfw-install)
 
 download_file(${GLFW_URL} ${CMAKE_BINARY_DIR}/glfw-${GLFW_VERSION}.zip)
 file(ARCHIVE_EXTRACT INPUT ${CMAKE_BINARY_DIR}/glfw-${GLFW_VERSION}.zip DESTINATION ${GLFW_SOURCE_DIR})
+
+# The source directory should now be glfw-src/glfw-${GLFW_VERSION}
+set(GLFW_EXTRACTED_DIR ${GLFW_SOURCE_DIR}/glfw-${GLFW_VERSION})
 
 # Build GLFW
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
@@ -33,9 +36,9 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(${GLFW_SOURCE_DIR} ${GLFW_BUILD_DIR})
+add_subdirectory(${GLFW_EXTRACTED_DIR} ${GLFW_BUILD_DIR})
 
-include_directories(${GLFW_SOURCE_DIR}/include)
+include_directories(${GLFW_EXTRACTED_DIR}/include)
 include_directories(${GLFW_INSTALL_DIR}/include)
 
 # Add platform-specific libraries
