@@ -1,0 +1,9 @@
+/home/void/Documents/OpenGLProject/build/CMakeFiles/glad.dir
+/home/void/Documents/OpenGLProject/build/CMakeFiles/OpenGLProject.dir
+/home/void/Documents/OpenGLProject/build/CMakeFiles/edit_cache.dir
+/home/void/Documents/OpenGLProject/build/CMakeFiles/rebuild_cache.dir
+/home/void/Documents/OpenGLProject/build/glfw-build/CMakeFiles/edit_cache.dir
+/home/void/Documents/OpenGLProject/build/glfw-build/CMakeFiles/rebuild_cache.dir
+/home/void/Documents/OpenGLProject/build/glfw-build/src/CMakeFiles/glfw.dir
+/home/void/Documents/OpenGLProject/build/glfw-build/src/CMakeFiles/edit_cache.dir
+/home/void/Documents/OpenGLProject/build/glfw-build/src/CMakeFiles/rebuild_cache.dir
