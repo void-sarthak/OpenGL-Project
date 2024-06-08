@@ -5,69 +5,47 @@ project(OpenGLProject)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Include directories for header files
+include_directories(include)
+include_directories(external/glfw/include) # Include GLFW headers globally
+
 # Add GLAD source files
 add_library(glad STATIC lib/glad/src/glad.c)
-include_directories(include)
 
-# Function to download a file
-function(download_file url output)
-    if(NOT EXISTS ${output})
-        message(STATUS "Downloading ${url}")
-        file(DOWNLOAD ${url} ${output})
-    endif()
-endfunction()
+# Add stb_image library
+add_library(stb_image STATIC lib/stb/stb_image.cpp)
 
-# Download and build GLFW
-set(GLFW_VERSION 3.3.2)
-set(GLFW_URL https://github.com/glfw/glfw/archive/${GLFW_VERSION}.zip)
-set(GLFW_SOURCE_DIR ${CMAKE_BINARY_DIR}/glfw-src)
-set(GLFW_BUILD_DIR ${CMAKE_BINARY_DIR}/glfw-build)
-set(GLFW_INSTALL_DIR ${CMAKE_BINARY_DIR}/glfw-install)
-
-download_file(${GLFW_URL} ${CMAKE_BINARY_DIR}/glfw-${GLFW_VERSION}.zip)
-file(ARCHIVE_EXTRACT INPUT ${CMAKE_BINARY_DIR}/glfw-${GLFW_VERSION}.zip DESTINATION ${GLFW_SOURCE_DIR})
-
-# The source directory should now be glfw-src/glfw-${GLFW_VERSION}
-set(GLFW_EXTRACTED_DIR ${GLFW_SOURCE_DIR}/glfw-${GLFW_VERSION})
-
-# Build GLFW
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
-
-add_subdirectory(${GLFW_EXTRACTED_DIR} ${GLFW_BUILD_DIR})
-
-include_directories(${GLFW_EXTRACTED_DIR}/include)
-include_directories(${GLFW_INSTALL_DIR}/include)
-
-# Add platform-specific libraries
+# Set platform-specific configurations
 if (WIN32)
-    set(PLATFORM_LIBS ${CMAKE_DL_LIBS})
-elseif (APPLE)
-    find_library(COCOA_LIBRARY Cocoa)
-    find_library(IOKIT_LIBRARY IOKit)
-    find_library(CORE_FOUNDATION_LIBRARY CoreFoundation)
-    find_library(CORE_VIDEO_LIBRARY CoreVideo)
-    set(PLATFORM_LIBS ${COCOA_LIBRARY} ${IOKIT_LIBRARY} ${CORE_FOUNDATION_LIBRARY} ${CORE_VIDEO_LIBRARY})
+    # Windows specific configurations
+    set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+    set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+
+    add_subdirectory(lib/glfw)
+
+    set(PLATFORM_LIBS glfw ${CMAKE_DL_LIBS})
 else()
-    set(PLATFORM_LIBS dl)
+    # Linux specific configurations
+    find_package(PkgConfig REQUIRED)
+    pkg_search_module(GLFW REQUIRED glfw3)
+    set(PLATFORM_LIBS ${GLFW_LIBRARIES} ${CMAKE_DL_LIBS})  # Added ${CMAKE_DL_LIBS} for Linux
 endif()
 
 # Add source files
 set(SOURCES 
-    src/main.cpp 
+    src/main.cpp
     src/VertexBuffer.cpp
     src/IndexBuffer.cpp
     src/VertexArray.cpp
     src/Shader.cpp
+    src/Texture.cpp
 )
-
-# Add include directories
-include_directories(include)  # Ensure include directory is included for shader.h
 
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Link GLFW, GLAD, and platform-specific libraries
-target_link_libraries(${PROJECT_NAME} glad glfw ${PLATFORM_LIBS})
+# Link GLFW, GLAD, and stb_image libraries
+target_link_libraries(OpenGLProject glad glfw stb_image ${PLATFORM_LIBS})
+

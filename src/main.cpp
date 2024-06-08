@@ -2,8 +2,8 @@
 #include <VertexBuffer.h>
 #include <IndexBuffer.h>
 #include <VertexArray.h>
+#include <Texture.h>
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -20,16 +20,16 @@ void processInput(GLFWwindow *window)
 
 float vertices[] = 
 {
-    -0.5f,  0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-     0.5f,  0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f
+     0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right 
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+    -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
+     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
 };
 
 unsigned int indices[] =
 {
     0, 1, 2,
-    1, 2, 3
+    0, 1, 3
 };
 
 int main()
@@ -69,11 +69,17 @@ int main()
 
     Shader basicShader("Shaders/vertexShader.glsl", "Shaders/fragmentShader.glsl");
 
+    Texture texture("Textures/Goku.jpeg");
+
     VertexArray va;
     VertexBuffer vb(vertices, sizeof(vertices));
 
     VertexBufferLayout layout;
+
     layout.Push<float>(3);
+    layout.Push<float>(3);
+    layout.Push<float>(2);
+
     va.AddBuffer(vb, layout);
 
     IndexBuffer ib(indices, 6);
@@ -89,6 +95,7 @@ int main()
 
         // Swap front and back buffers
         basicShader.Use();
+        texture.Bind();
         va.Bind();
         ib.Bind();
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
