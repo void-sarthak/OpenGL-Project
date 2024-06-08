@@ -1,6 +1,0 @@
-C:/Users/sarth/OneDrive/Documents/Git/OpenGL-Project/build/CMakeFiles/glad.dir
-C:/Users/sarth/OneDrive/Documents/Git/OpenGL-Project/build/CMakeFiles/OpenGLProject.dir
-C:/Users/sarth/OneDrive/Documents/Git/OpenGL-Project/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/sarth/OneDrive/Documents/Git/OpenGL-Project/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/sarth/OneDrive/Documents/Git/OpenGL-Project/build/glfw-build/CMakeFiles/ALL_BUILD.dir
-C:/Users/sarth/OneDrive/Documents/Git/OpenGL-Project/build/glfw-build/src/CMakeFiles/glfw.dir
