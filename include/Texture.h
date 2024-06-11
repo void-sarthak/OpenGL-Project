@@ -14,7 +14,7 @@ class Texture
     Texture(const char* path);
     ~Texture();
 
-    void Bind() const;
+    void Bind(unsigned int slot) const;
     void Unbind() const;
 };
 

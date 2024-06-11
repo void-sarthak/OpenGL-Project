@@ -105,17 +105,46 @@ void Shader::Use()
     glUseProgram(ID);
 }
 
-void Shader::shaderSetBool(const std::string &name, bool value) const
+void Shader::setBool(const std::string &name, bool value) const
 {
-    glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+    unsigned int location = glGetUniformLocation(ID, name.c_str());
+    if(!location)
+    {
+        std::cout << "Location: " << name << " not found" << std::endl;
+    }
+
+    glUniform1i(location, (int)value);
 }
 
-void Shader::shaderSetInt(const std::string &name, int value) const
+void Shader::setInt(const std::string &name, int value) const
 {
-    glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+    unsigned int location = glGetUniformLocation(ID, name.c_str());
+    if(!location)
+    {
+        std::cout << "Location: " << name << " not found" << std::endl;
+    }
+
+    glUniform1i(location, value);
 }
 
-void Shader::shaderSetFloat(const std::string &name, float value) const
+void Shader::setFloat(const std::string &name, float value) const
 {
-    glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+    unsigned int location = glGetUniformLocation(ID, name.c_str());
+    if(!location)
+    {
+        std::cout << "Location: " << name << " not found" << std::endl;
+    }
+
+    glUniform1f(location, value);
+}
+
+void Shader::setMat4(const std::string &name, glm::mat4& value) const
+{
+    unsigned int location = glGetUniformLocation(ID, name.c_str());
+    if(location != NULL)
+    {
+        std::cout << "Location: " << name << " not found" << std::endl;
+    }
+
+    glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
 }
