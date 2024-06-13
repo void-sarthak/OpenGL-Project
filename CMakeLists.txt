@@ -41,6 +41,8 @@ set(SOURCES
     src/VertexArray.cpp
     src/Shader.cpp
     src/Texture.cpp
+    src/VertexBufferLayout.cpp
+    src/Camera.cpp
 )
 
 # Create the executable

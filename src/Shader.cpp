@@ -108,7 +108,7 @@ void Shader::Use()
 void Shader::setBool(const std::string &name, bool value) const
 {
     unsigned int location = glGetUniformLocation(ID, name.c_str());
-    if(!location)
+    if(location == -1)
     {
         std::cout << "Location: " << name << " not found" << std::endl;
     }
@@ -119,7 +119,8 @@ void Shader::setBool(const std::string &name, bool value) const
 void Shader::setInt(const std::string &name, int value) const
 {
     unsigned int location = glGetUniformLocation(ID, name.c_str());
-    if(!location)
+
+    if(location == -1)
     {
         std::cout << "Location: " << name << " not found" << std::endl;
     }
@@ -130,7 +131,8 @@ void Shader::setInt(const std::string &name, int value) const
 void Shader::setFloat(const std::string &name, float value) const
 {
     unsigned int location = glGetUniformLocation(ID, name.c_str());
-    if(!location)
+
+    if(location == -1)
     {
         std::cout << "Location: " << name << " not found" << std::endl;
     }
@@ -141,7 +143,8 @@ void Shader::setFloat(const std::string &name, float value) const
 void Shader::setMat4(const std::string &name, glm::mat4& value) const
 {
     unsigned int location = glGetUniformLocation(ID, name.c_str());
-    if(location != NULL)
+
+    if(location == -1)
     {
         std::cout << "Location: " << name << " not found" << std::endl;
     }

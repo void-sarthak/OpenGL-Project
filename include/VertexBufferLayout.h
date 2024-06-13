@@ -24,42 +24,29 @@ struct VertexBufferElements
 
 class VertexBufferLayout
 {
-    private:
+private:
     std::vector<VertexBufferElements> elements;
     unsigned int stride;
 
-    public:
+public:
     VertexBufferLayout()
         : stride(0) {}
 
     template<typename T>
-    void Push(unsigned int count)
-    {
-    }
+    void Push(unsigned int count);
 
-    template<>
-    void Push<float>(unsigned int count)
-    {
-        elements.push_back({ GL_FLOAT, count, GL_FALSE });
-        stride += count * VertexBufferElements::GetSizeOfType(GL_FLOAT);
-    }
-
-    template<>
-    void Push<unsigned int>(unsigned int count)
-    {
-        elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
-        stride += count * VertexBufferElements::GetSizeOfType(GL_UNSIGNED_INT);
-    }
-
-    template<>
-    void Push<unsigned char>(unsigned int count)
-    {
-        elements.push_back({ GL_UNSIGNED_BYTE, count, GL_TRUE });
-        stride += count * VertexBufferElements::GetSizeOfType(GL_UNSIGNED_BYTE);
-    }
-
-    inline const std::vector<VertexBufferElements> GetElements() const& { return elements; }
+    inline const std::vector<VertexBufferElements>& GetElements() const { return elements; }
     inline unsigned int GetStride() const { return stride; }
 };
+
+// Forward declare the specializations
+template<>
+void VertexBufferLayout::Push<float>(unsigned int count);
+
+template<>
+void VertexBufferLayout::Push<unsigned int>(unsigned int count);
+
+template<>
+void VertexBufferLayout::Push<unsigned char>(unsigned int count);
 
 #endif
