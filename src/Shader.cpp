@@ -100,9 +100,14 @@ Shader::~Shader()
 
 }
 
-void Shader::Use()
+void Shader::Bind()
 {
     glUseProgram(ID);
+}
+
+void Shader::Unbind()
+{
+    glUseProgram(0);
 }
 
 void Shader::setBool(const std::string &name, bool value) const
@@ -150,4 +155,16 @@ void Shader::setMat4(const std::string &name, glm::mat4& value) const
     }
 
     glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+}
+
+void Shader::setVec3(const std::string &name, glm::vec3& value) const
+{
+    unsigned int location = glGetUniformLocation(ID, name.c_str());
+
+    if(location == -1)
+    {
+        std::cout << "Location: " << name << " not found" << std::endl;
+    }
+
+    glUniform3fv(location, 1, &value[0]);
 }
