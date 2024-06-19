@@ -140,7 +140,9 @@ int main()
     // View matrix
     glm::mat4 view = glm::mat4(1.0f);
 
+    //Shaders
     Shader basicShader("Shaders/vertexShader.glsl", "Shaders/fragmentShader.glsl");
+    Shader nightShader("Shaders/vertexShader.glsl", "Shaders/nightFragmentShader.glsl");
 
     Texture basicTex("Textures/Goku.jpeg");
 
@@ -162,10 +164,16 @@ int main()
     vb.Unbind();
     ib.Unbind();
 
-    // Setting some Uniforms
-    glm::vec3 objectColor = glm::vec3(0.8f, 0.3f, 0.5f);
-    glm::vec3 lightPos = glm::vec3(01.2f, 1.0f, 2.0f);
-    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);   
+    // Object Detail
+    glm::vec3 objAmbient = glm::vec3(0.8f, 0.3f, 0.5f);
+    glm::vec3 objDiffuse = glm::vec3(0.8f, 0.3f, 0.5f);
+    glm::vec3 objSpecular = glm::vec3(0.5f);
+
+    // Light Details
+    glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+    glm::vec3 ambientColor = glm::vec3(0.1f);
+    glm::vec3 diffuseColor = glm::vec3(0.5f);
+    glm::vec3 specularColor = glm::vec3(1.0f);   
 
     //Shader for light
     Shader lightShader("Shaders/lightVertexShader.glsl", "Shaders/lightFragmentShader.glsl");
@@ -218,10 +226,17 @@ int main()
         basicShader.setMat4("view", view);
 
         //Setting uniforms
-        basicShader.setVec3("objectColor", objectColor);
+        basicShader.setVec3("material.ambient", objAmbient);
+        basicShader.setVec3("material.diffuse", objDiffuse);
+        basicShader.setVec3("material.specular", objSpecular);
+        basicShader.setFloat("material.shininess", 32.0f);
+
         basicShader.setVec3("eyePos", camera.Position);
-        basicShader.setVec3("lightPos", lightPos);
-        basicShader.setVec3("lightColor", lightColor);
+
+        basicShader.setVec3("light.position", lightPos);
+        basicShader.setVec3("light.ambient", ambientColor);
+        basicShader.setVec3("light.diffuse", diffuseColor);
+        basicShader.setVec3("light.specular", specularColor);
 
         // Binding vertex, indices and texture data to shader
         basicTex.Bind(0);
@@ -243,6 +258,7 @@ int main()
         lightIB.Bind();
 
         // Setting uniform
+        glm::vec3 lightColor = glm::vec3(1.0f);
         lightShader.setVec3("lightColor", lightColor);
 
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
