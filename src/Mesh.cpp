@@ -18,7 +18,7 @@ void Mesh::SetUpMesh()
 {
     va = new VertexArray();
     vb = new VertexBuffer(&vertices[0], vertices.size());
-    ib = new IndexBuffer(&indices[0], indices.size());
+    ib = new IndexBuffer(&indices[0], indices.size()/sizeof(unsigned int));
 
     VertexBufferLayout layout;
     layout.Push<float>(3); // vertex positions

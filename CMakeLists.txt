@@ -33,10 +33,8 @@ else()
     set(PLATFORM_LIBS ${GLFW_LIBRARIES} ${CMAKE_DL_LIBS})  # Added ${CMAKE_DL_LIBS} for Linux
 endif()
 
-ADD_SUBDIRECTORY(assimp)
-
 # Add source files
-set(SOURCES 
+set(SOURCES
     src/main.cpp
     src/VertexBuffer.cpp
     src/IndexBuffer.cpp
@@ -47,6 +45,8 @@ set(SOURCES
     src/Camera.cpp
     src/Window.cpp
     src/Renderer.cpp
+    src/Mesh.cpp
+    src/Model.cpp
 )
 
 # Create the executable

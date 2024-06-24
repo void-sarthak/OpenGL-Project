@@ -12,9 +12,11 @@ class Texture
     unsigned int ID;
 
     public:
-    std::string type;
     Texture(const char* path);
     ~Texture();
+
+    std::string type;
+    std::string path;
 
     void Bind(unsigned int slot) const;
     void Unbind() const;

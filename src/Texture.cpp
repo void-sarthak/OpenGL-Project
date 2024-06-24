@@ -1,6 +1,7 @@
 #include <Texture.h>
 
 Texture::Texture(const char* path)
+    : path(path)
 {
     glGenTextures(1, &ID);
     glBindTexture(GL_TEXTURE_2D, ID);
