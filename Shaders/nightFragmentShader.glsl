@@ -57,15 +57,17 @@ void main()
 
     finalColor += CalculateDirLight(dirLight, N, E);
 
-    for(int i = 0; i < NR_POINT_LIGHTS; i++)
+    for(int i = 0; i < NR_POINT_LIGHTS; i++;)
+    {
         finalColor += CalcPointLight(pointLights[i], N, pos, E);
+    }
 
     FragColor = vec4(finalColor, 1.0);
 }
 
 vec3 CalculateDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
-    vec3 L = -normalize(light.direction);N
+    vec3 L = -normalize(light.direction);
     vec3 R = reflect(-L, normal);
 
     float diff = max(dot(normal, L), 0.0);
@@ -80,8 +82,7 @@ vec3 CalculateDirLight(DirLight light, vec3 normal, vec3 viewDir)
     return ambientColor + diffuseColor + specularColor;
 }
 
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3
-viewDir)
+vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
     vec3 lightDir = normalize(light.position - fragPos);
 

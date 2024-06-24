@@ -4,6 +4,7 @@
 #include <stb/stb_image.h>
 #include <glad/glad.h>
 #include <iostream>
+#include <string>
 
 class Texture
 {
@@ -11,6 +12,7 @@ class Texture
     unsigned int ID;
 
     public:
+    std::string type;
     Texture(const char* path);
     ~Texture();
 

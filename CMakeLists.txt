@@ -33,6 +33,8 @@ else()
     set(PLATFORM_LIBS ${GLFW_LIBRARIES} ${CMAKE_DL_LIBS})  # Added ${CMAKE_DL_LIBS} for Linux
 endif()
 
+ADD_SUBDIRECTORY(assimp)
+
 # Add source files
 set(SOURCES 
     src/main.cpp
@@ -43,11 +45,12 @@ set(SOURCES
     src/Texture.cpp
     src/VertexBufferLayout.cpp
     src/Camera.cpp
+    src/Window.cpp
+    src/Renderer.cpp
 )
 
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Link GLFW, GLAD, and stb_image libraries
-target_link_libraries(OpenGLProject glad glfw stb_image ${PLATFORM_LIBS})
-
+# Link GLFW, GLAD, stb_image, and Assimp libraries
+target_link_libraries(OpenGLProject glad glfw stb_image ${PLATFORM_LIBS} assimp)

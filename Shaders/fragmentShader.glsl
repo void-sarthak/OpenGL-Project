@@ -24,8 +24,6 @@ uniform Material material;
 uniform Light light;
 uniform vec3 eyePos;
 
-uniform sampler2D ourTexture;
-
 out vec4 FragColor;
 
 void main()
