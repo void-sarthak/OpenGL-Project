@@ -1,11 +1,5 @@
 #include <VertexBufferLayout.h>
 
-template<typename T>
-void VertexBufferLayout::Push(unsigned int count)
-{
-    // General implementation
-}
-
 // Define the specialization for float
 template<>
 void VertexBufferLayout::Push<float>(unsigned int count)

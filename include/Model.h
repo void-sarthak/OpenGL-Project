@@ -9,7 +9,7 @@
 class Model
 {
     public:
-    Model(char *path);
+    Model(const char *path);
     ~Model();
 
     void DrawShader(Shader &Shader);
@@ -18,7 +18,7 @@ class Model
     std::vector<Mesh> meshes;
     std::string directory;
 
-    void loadModel(char* path);
+    void loadModel(const char* path);
     void processNode(aiNode *node, const aiScene *scene);
     Mesh processMesh(aiMesh *mesh, const aiScene *scene);
     std::vector<Texture> loadMaterialTexture(aiMaterial *mat, aiTextureType type, std::string typeName);

@@ -2,7 +2,7 @@
 
 std::vector<Texture> textures_loaded;
 
-Model::Model(char *path)
+Model::Model(const char *path)
 {
     loadModel(path);
 }
@@ -20,7 +20,7 @@ void Model::DrawShader(Shader& Shader)
     }
 }
 
-void Model::loadModel(char* path)
+void Model::loadModel(const char* path)
 {
     Assimp::Importer import;
     const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -82,9 +82,8 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
         }
         else
             vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-
-        vertices.push_back(vertex);
     }
+
     // process indices
     for(unsigned int i = 0; i < mesh->mNumFaces; i++)
     {

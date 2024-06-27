@@ -1,7 +1,11 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <Renderer.h>
+#include <Shader.h>
+#include <Texture.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 #include <string>
@@ -21,9 +25,9 @@ class Mesh
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
     
-    VertexArray *va;
-    VertexBuffer *vb;
-    IndexBuffer *ib;
+    unsigned int va;
+    unsigned int vb;
+    unsigned int ib;
 
     void SetUpMesh();
 

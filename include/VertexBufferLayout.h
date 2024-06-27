@@ -39,14 +39,4 @@ public:
     inline unsigned int GetStride() const { return stride; }
 };
 
-// Forward declare the specializations
-template<>
-void VertexBufferLayout::Push<float>(unsigned int count);
-
-template<>
-void VertexBufferLayout::Push<unsigned int>(unsigned int count);
-
-template<>
-void VertexBufferLayout::Push<unsigned char>(unsigned int count);
-
 #endif
