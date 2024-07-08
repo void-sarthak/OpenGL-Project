@@ -35,10 +35,6 @@ bool Window::Init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
     // Create the window
     window = glfwCreateWindow(width, height, title, nullptr, nullptr);
     if (!window)
@@ -142,13 +138,13 @@ void Window::MouseButtonCallback(GLFWwindow* window, int button, int action, int
         if (action == GLFW_PRESS)
         {
             instance->leftMouseButtonHeld = true;
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); // Show the cursor
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // Show the cursor
         }
         else if (action == GLFW_RELEASE)
         {
             instance->leftMouseButtonHeld = false;
             instance->firstMouse = true;
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // Hide the cursor
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); // Hide the cursor
         }
     }
 }

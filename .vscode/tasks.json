@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build",
+        "type": "shell",
+        "command": "cmake",
+        "args": [
+          "--build",
+          "${workspaceFolder}/build"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Generated task for building the OpenGL project using CMake."
+      },
+      {
+        "label": "configure",
+        "type": "shell",
+        "command": "cmake",
+        "args": [
+          "-S",
+          "${workspaceFolder}",
+          "-B",
+          "${workspaceFolder}/build"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Generated task for configuring the OpenGL project using CMake."
+      }
+    ]
+  }
+  

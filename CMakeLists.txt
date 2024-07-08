@@ -33,6 +33,10 @@ else()
     set(PLATFORM_LIBS ${GLFW_LIBRARIES} ${CMAKE_DL_LIBS})  # Added ${CMAKE_DL_LIBS} for Linux
 endif()
 
+# Find and link Assimp
+find_package(assimp REQUIRED)
+include_directories(${ASSIMP_INCLUDE_DIRS})
+
 # Add source files
 set(SOURCES
     src/main.cpp
@@ -53,4 +57,4 @@ set(SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link GLFW, GLAD, stb_image, and Assimp libraries
-target_link_libraries(OpenGLProject glad glfw stb_image ${PLATFORM_LIBS} assimp)
+target_link_libraries(OpenGLProject glad glfw stb_image ${PLATFORM_LIBS} ${ASSIMP_LIBRARIES})
