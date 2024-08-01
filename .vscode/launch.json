@@ -1,35 +1,59 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
       {
-        "name": "Launch OpenGL Project",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/OpenGLProject",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "gdb",
-        "setupCommands": [
-          {
-            "description": "Enable pretty-printing for gdb",
-            "text": "-enable-pretty-printing",
-            "ignoreFailures": true
+          "name": "Launch OpenGL Project (Linux)",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/build/OpenGLProject",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ],
+          "preLaunchTask": "build",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "logging": {
+              "moduleLoad": false,
+              "programOutput": true,
+              "trace": false,
+              "engineLogging": false,
+              "exceptions": false
           }
-        ],
-        "preLaunchTask": "build",
-        "miDebuggerPath": "/usr/bin/gdb",
-        "miDebuggerArgs": "",
-        "logging": {
-          "moduleLoad": false,
-          "programOutput": true,
-          "trace": false,
-          "engineLogging": false,
-          "exceptions": false
-        }
+      },
+      {
+          "name": "Launch OpenGL Project (Windows)",
+          "type": "cppvsdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}\\build\\OpenGLProject.exe",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}",
+          "environment": [],
+          "externalConsole": false,
+          "preLaunchTask": "build",
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ],
+          "logging": {
+              "moduleLoad": false,
+              "programOutput": true,
+              "trace": false,
+              "engineLogging": false,
+              "exceptions": false
+          }
       }
-    ]
-  }
-  
+  ]
+}

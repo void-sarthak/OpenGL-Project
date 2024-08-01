@@ -1,6 +1,5 @@
 #include <Window.h>
 #include <iostream>
-#include <Model.h>
 #include <Renderer.h>
 
 // settings
@@ -15,8 +14,6 @@ int main()
     
     Renderer renderer;
     renderer.Init();
-
-    // Model model("Models/backpack.obj");
 
     // Main loop
     while (!window.Close())
